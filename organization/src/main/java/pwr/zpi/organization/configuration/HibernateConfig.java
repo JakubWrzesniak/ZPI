@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import pwr.zpi.organization.tenant.TenantIdentifierResolver;
+import pwr.zpi.organization.configuration.tenant.TenantIdentifierResolver;
 
 import javax.sql.DataSource;
 import java.util.HashMap;
@@ -32,7 +32,7 @@ public class HibernateConfig {
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean emfBean = new LocalContainerEntityManagerFactoryBean();
-        emfBean.setPackagesToScan("pwr.zpi.organization.entity");
+        emfBean.setPackagesToScan("pwr.zpi.organization.infrastructure.entity");
         emfBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
         emfBean.setDataSource(dataSource());
         Map<String, Object> jpaProperties = new HashMap<>();
@@ -47,7 +47,7 @@ public class HibernateConfig {
         jpaProperties.put(Environment.DRIVER,
                 "com.microsoft.sqlserver.jdbc.SQLServerDriver");
         jpaProperties.put(Environment.HBM2DDL_AUTO, "none");
-//        jpaProperties.put(Environment.JAKARTA_HBM2DDL_SCRIPTS_ACTION, "drop-and-create");
+//        jpaProperties.put(Environment.JAKARTA_HBM2DDL_SCRIPTS_ACTION, "create");
 //        jpaProperties.put(Environment.JAKARTA_HBM2DDL_SCRIPTS_CREATE_TARGET, "create.sql");
 //        jpaProperties.put(Environment.JAKARTA_HBM2DDL_CREATE_SOURCE, "metadata");
         emfBean.setJpaPropertyMap(jpaProperties);

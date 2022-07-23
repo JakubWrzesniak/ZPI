@@ -1,4 +1,4 @@
-//package pwr.zpi.organization;
+package pwr.zpi.organization;//package pwr.zpi.organization;
 //
 //import org.springframework.stereotype.Component;
 //import org.springframework.web.servlet.AsyncHandlerInterceptor;
