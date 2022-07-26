@@ -13,10 +13,15 @@ import pwr.zpi.organization.domain.model.dto.OrganizationDto;
 @RequestMapping(path = "/organization",  produces = "application/json; charset=UTF-8")
 public class OrganizationController {
 
-    @Autowired
+    final
     OrganizationServiceAdapter organizationsService;
-    @Autowired
+    final
     IssueServiceAdapter issueServiceAdapter;
+
+    public OrganizationController(OrganizationServiceAdapter organizationsService, IssueServiceAdapter issueServiceAdapter) {
+        this.organizationsService = organizationsService;
+        this.issueServiceAdapter = issueServiceAdapter;
+    }
 
 
     @PostMapping
@@ -24,6 +29,13 @@ public class OrganizationController {
     @ResponseBody
     public OrganizationDto create(@RequestBody OrganizationDto resource) {
         return organizationsService.createOrganization(resource);
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public String hello() {
+        return "HII";
     }
 
     @PostMapping("/addIssue")

@@ -1,10 +1,10 @@
-package com.pwr.zpi;
+package pwr.zpi.application;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ZpiApplicationTests {
+class ApplicationTests {
 
     @Test
     void contextLoads() {

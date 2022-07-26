@@ -8,7 +8,11 @@
 	<packaging>jar</packaging>
 	<version>1.0.1</version>
 	<name>Azure Elastic Database Tools</name>
-
+	<parent>
+		<groupId>com.pwr</groupId>
+		<artifactId>ZPI</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 	<developers>
 		<developer>
 			<id>microsoft</id>
