@@ -1,14 +1,13 @@
-package pwr.zpi.organization.domain.model.dto;
+package pwr.zpi.organization.application.view_model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class IssueDto {
-    private Long id;
+public class OrganizationCreationViewModel {
     private String name;
+    private String address;
 }

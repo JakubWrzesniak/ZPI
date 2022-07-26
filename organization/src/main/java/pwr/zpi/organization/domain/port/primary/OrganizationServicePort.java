@@ -8,12 +8,12 @@ import pwr.zpi.organization.domain.port.secondary.OrganizationRepositoryPort;
 
 import java.util.UUID;
 
-public class OrganizationServicePortImpl implements OrganizationServiceAdapter {
+public class OrganizationServicePort implements OrganizationServiceAdapter {
 
     private final OrganizationRepositoryPort organizationsRepository;
     private final OrganizationMapper organizationMapper = OrganizationMapper.INSTANCE;
 
-    public OrganizationServicePortImpl(OrganizationRepositoryPort organizationsRepository) {
+    public OrganizationServicePort(OrganizationRepositoryPort organizationsRepository) {
         this.organizationsRepository = organizationsRepository;
     }
 
@@ -22,12 +22,12 @@ public class OrganizationServicePortImpl implements OrganizationServiceAdapter {
         return organizationMapper.OrganizationToOrganizationDto(createOrganizationHelper(organization));
     }
 
-    // TU Lepiej wstrzykiwanie Servisu zrobić, ale idk jak
     public Organization createOrganizationHelper(OrganizationDto organization) {
+        // Tu tylko mapper zamiast buildera
         var newOrg = Organization.builder()
                 .address(organization.getAddress())
                 .name(organization.getName())
-                .id(UUID.randomUUID()) //Czemu tak? To ustala tu? Czy baza danych zwraca?
+                .id(UUID.randomUUID())
                 .build();
         OrganizationDto newOrgDto = organizationsRepository.save(organizationMapper
                 .OrganizationToOrganizationDto(newOrg));

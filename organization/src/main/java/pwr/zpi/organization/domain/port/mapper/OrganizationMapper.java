@@ -14,19 +14,19 @@ public interface OrganizationMapper {
 
     OrganizationMapper INSTANCE = Mappers.getMapper( OrganizationMapper.class );
 
-    @Mapping(source = "id", target = "id", qualifiedByName = "UUIDToSting")
+//    @Mapping(source = "id", target = "id", qualifiedByName = "UUIDToSting")
     OrganizationDto OrganizationToOrganizationDto(Organization organization);
 
-    @Mapping(source = "id", target = "id", qualifiedByName = "StringToUUID")
+//    @Mapping(source = "id", target = "id", qualifiedByName = "StringToUUID")
     Organization OrganizationDtoToOrganization(OrganizationDto organization);
-
-    @Named("UUIDToSting")
-    static String UUIDToSting(UUID uuid) {
-        return uuid.toString();
-    }
-
-    @Named("StringToUUID")
-    static UUID StringToUUID(String id) {
-        return UUID.fromString(id);
-    }
+//
+//    @Named("UUIDToSting")
+//    static String UUIDToSting(UUID uuid) {
+//        return uuid.toString();
+//    }
+//
+//    @Named("StringToUUID")
+//    static UUID StringToUUID(String id) {
+//        return UUID.fromString(id);
+//    }
 }

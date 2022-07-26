@@ -1,9 +1,9 @@
-package pwr.zpi.organization.configuration.tenant;
+package pwr.zpi.organization.infrastructure.config.tenant;
 
 public abstract class TenantContext {
 
     public static final String DEFAULT_TENANT_ID = "public";
-    private static final ThreadLocal<String> currentTenant = new ThreadLocal<String>();
+    private static final ThreadLocal<String> currentTenant = new ThreadLocal<>();
 
     public static void setCurrentTenant(String tenant) {
         currentTenant.set(tenant);

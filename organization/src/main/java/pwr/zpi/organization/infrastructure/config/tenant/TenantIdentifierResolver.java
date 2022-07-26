@@ -1,4 +1,4 @@
-package pwr.zpi.organization.configuration.tenant;
+package pwr.zpi.organization.infrastructure.config.tenant;
 
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.context.annotation.Scope;

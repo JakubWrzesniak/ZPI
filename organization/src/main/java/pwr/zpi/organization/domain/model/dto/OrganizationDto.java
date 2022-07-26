@@ -11,7 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrganizationDto implements Serializable {
-    private String id;
+    private UUID id;
     private String name;
     private String address;
 }

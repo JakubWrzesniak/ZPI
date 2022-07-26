@@ -1,4 +1,4 @@
-package pwr.zpi.organization.infrastructure.datasource;
+package pwr.zpi.organization.infrastructure.service;
 
 import com.microsoft.azure.elasticdb.core.commons.helpers.ReferenceObjectHelper;
 import com.microsoft.azure.elasticdb.shard.base.Shard;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Connection;
 import java.util.UUID;
 
-import static pwr.zpi.organization.infrastructure.datasource.SqlDatabaseService.*;
+import static pwr.zpi.organization.infrastructure.service.SqlDatabaseService.*;
 
 @Component
 @Log4j2
@@ -101,7 +101,7 @@ public class ShardManagementService {
             catch (Exception e) {
                 e.printStackTrace();
             }
-            log.info(String.format("Created Shard Map %1$s", shardMap.getName()));
+            log.info(String.format("Created Shard Map %1$s", shardMap != null ? shardMap.getName() : null));
         }
 
         return shardMap;

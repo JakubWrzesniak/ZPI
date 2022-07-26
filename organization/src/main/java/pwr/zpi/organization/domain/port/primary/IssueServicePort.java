@@ -8,12 +8,12 @@ import pwr.zpi.organization.domain.port.secondary.IssueRepositoryPort;
 
 import java.util.UUID;
 
-public class IssueServicePortImpl implements IssueServiceAdapter {
+public class IssueServicePort implements IssueServiceAdapter {
 
     private final IssueRepositoryPort issueRepository;
     private final IssueMapper issueMapper = IssueMapper.INSTANCE;
 
-    public IssueServicePortImpl(IssueRepositoryPort issueRepository) {
+    public IssueServicePort(IssueRepositoryPort issueRepository) {
         this.issueRepository = issueRepository;
     }
 

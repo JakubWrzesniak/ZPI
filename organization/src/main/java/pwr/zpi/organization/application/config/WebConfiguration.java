@@ -1,4 +1,4 @@
-package pwr.zpi.organization.configuration;
+package pwr.zpi.organization.application.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

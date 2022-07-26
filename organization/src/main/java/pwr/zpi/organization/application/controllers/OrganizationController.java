@@ -3,10 +3,11 @@ package pwr.zpi.organization.application.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import pwr.zpi.organization.application.adpter.primary.IssueServiceAdapter;
 import pwr.zpi.organization.application.adpter.primary.OrganizationServiceAdapter;
-import pwr.zpi.organization.domain.model.dto.IssueDto;
+import pwr.zpi.organization.application.view_model.OrganizationCreationViewModel;
 import pwr.zpi.organization.domain.model.dto.OrganizationDto;
+
+import java.util.UUID;
 
 
 @RestController
@@ -27,20 +28,14 @@ public class OrganizationController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public OrganizationDto create(@RequestBody OrganizationDto resource) {
-        return organizationsService.createOrganization(resource);
+    public OrganizationDto create(@RequestBody OrganizationCreationViewModel resource) {
+        OrganizationDto organizationDto = new OrganizationDto(UUID.randomUUID(), resource.getName(), resource.getAddress());
+        return organizationService.createOrganization(organizationDto);
     }
-
-    @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    @ResponseBody
-    public String hello() {
-        return "HII";
-    }
-
-    @PostMapping("/addIssue")
-    @ResponseStatus(HttpStatus.CREATED)
-    public IssueDto addIssue(@RequestBody String name) {
-        return issueServiceAdapter.addIssue(name);
-    }
+//
+//    @PostMapping("/addIssue")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public IssueDto addIssue(@RequestBody String name) {
+//        return issueService.addIssue(name);
+//    }
 }

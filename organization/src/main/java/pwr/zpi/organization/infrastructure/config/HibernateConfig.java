@@ -1,4 +1,4 @@
-package pwr.zpi.organization.configuration;
+package pwr.zpi.organization.infrastructure.config;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import org.hibernate.MultiTenancyStrategy;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import pwr.zpi.organization.configuration.tenant.TenantIdentifierResolver;
+import pwr.zpi.organization.infrastructure.config.tenant.TenantIdentifierResolver;
 
 import javax.sql.DataSource;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package pwr.zpi.organization.infrastructure.datasource;
+package pwr.zpi.organization.infrastructure.service;
 
 /*
  * Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.
