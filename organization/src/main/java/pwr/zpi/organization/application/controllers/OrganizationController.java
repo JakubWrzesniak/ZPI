@@ -1,8 +1,8 @@
 package pwr.zpi.organization.application.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import pwr.zpi.organization.application.adpter.primary.IssueServiceAdapter;
 import pwr.zpi.organization.application.adpter.primary.OrganizationServiceAdapter;
 import pwr.zpi.organization.application.view_model.OrganizationCreationViewModel;
 import pwr.zpi.organization.domain.model.dto.OrganizationDto;
@@ -15,12 +15,12 @@ import java.util.UUID;
 public class OrganizationController {
 
     final
-    OrganizationServiceAdapter organizationsService;
+    OrganizationServiceAdapter organizationService;
     final
     IssueServiceAdapter issueServiceAdapter;
 
-    public OrganizationController(OrganizationServiceAdapter organizationsService, IssueServiceAdapter issueServiceAdapter) {
-        this.organizationsService = organizationsService;
+    public OrganizationController(OrganizationServiceAdapter organizationService, IssueServiceAdapter issueServiceAdapter) {
+        this.organizationService = organizationService;
         this.issueServiceAdapter = issueServiceAdapter;
     }
 
