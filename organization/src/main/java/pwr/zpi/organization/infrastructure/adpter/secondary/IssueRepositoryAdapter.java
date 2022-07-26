@@ -8,7 +8,7 @@ import pwr.zpi.organization.infrastructure.adpter.mapper.IssueMapper;
 import pwr.zpi.organization.infrastructure.entity.org.Issue;
 
 @Component
-public class IssueAdapter implements IssueRepositoryPort {
+public class IssueRepositoryAdapter implements IssueRepositoryPort {
 
     @Autowired
     private IssueRepository issueRepository;

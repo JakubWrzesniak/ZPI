@@ -1,4 +1,4 @@
-package pwr.zpi.organization.configuration.tenant;
+package pwr.zpi.organization.infrastructure.config.tenant;
 
 
 //import com.google.common.annotations.Beta;

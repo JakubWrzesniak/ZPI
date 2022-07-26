@@ -6,12 +6,11 @@ import java.io.Serializable;
 import java.util.UUID;
 
 @Getter
-@Setter
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrganizationDto implements Serializable {
-    private String id;
+    private UUID id;
     private String name;
     private String address;
 }

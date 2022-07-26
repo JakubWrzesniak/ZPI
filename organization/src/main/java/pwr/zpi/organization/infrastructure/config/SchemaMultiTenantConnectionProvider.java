@@ -1,16 +1,16 @@
-package pwr.zpi.organization.configuration;
+package pwr.zpi.organization.infrastructure.config;
 
 import lombok.extern.log4j.Log4j2;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 import org.springframework.stereotype.Service;
-import pwr.zpi.organization.infrastructure.datasource.ShardManagementService;
+import pwr.zpi.organization.infrastructure.service.ShardManagementService;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static pwr.zpi.organization.configuration.tenant.TenantContext.DEFAULT_TENANT_ID;
-import static pwr.zpi.organization.infrastructure.datasource.SqlDatabaseService.getConnectionString;
+import static pwr.zpi.organization.infrastructure.config.tenant.TenantContext.DEFAULT_TENANT_ID;
+import static pwr.zpi.organization.infrastructure.service.SqlDatabaseService.getConnectionString;
 
 @Log4j2
 @Service

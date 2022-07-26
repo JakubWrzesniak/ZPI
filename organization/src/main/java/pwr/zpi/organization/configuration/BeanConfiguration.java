@@ -4,21 +4,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pwr.zpi.organization.application.adpter.primary.IssueServiceAdapter;
 import pwr.zpi.organization.application.adpter.primary.OrganizationServiceAdapter;
-import pwr.zpi.organization.domain.port.primary.IssueServicePortImpl;
-import pwr.zpi.organization.domain.port.primary.OrganizationServicePortImpl;
-import pwr.zpi.organization.infrastructure.adpter.secondary.IssueAdapter;
-import pwr.zpi.organization.infrastructure.adpter.secondary.OrganizationAdapter;
+import pwr.zpi.organization.domain.port.primary.IssueServicePort;
+import pwr.zpi.organization.domain.port.primary.OrganizationServicePort;
+import pwr.zpi.organization.infrastructure.adpter.secondary.IssueRepositoryAdapter;
+import pwr.zpi.organization.infrastructure.adpter.secondary.OrganizationRepositoryAdapter;
 
 @Configuration
 public class BeanConfiguration {
 
     @Bean
-    OrganizationServiceAdapter organizationServiceAdapter(OrganizationAdapter organizationAdapter) {
-        return new OrganizationServicePortImpl(organizationAdapter);
+    OrganizationServiceAdapter organizationServiceAdapter(OrganizationRepositoryAdapter organizationAdapter) {
+        return new OrganizationServicePort(organizationAdapter);
     }
 
     @Bean
-    IssueServiceAdapter issueServiceAdapter(IssueAdapter issueAdapter) {
-        return new IssueServicePortImpl(issueAdapter);
+    IssueServiceAdapter issueServiceAdapter(IssueRepositoryAdapter issueAdapter) {
+        return new IssueServicePort(issueAdapter);
     }
 }

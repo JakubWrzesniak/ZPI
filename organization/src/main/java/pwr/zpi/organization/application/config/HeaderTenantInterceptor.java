@@ -1,10 +1,10 @@
-package pwr.zpi.organization.configuration;
+package pwr.zpi.organization.application.config;
 
 import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.context.request.WebRequestInterceptor;
-import pwr.zpi.organization.configuration.tenant.TenantContext;
+import pwr.zpi.organization.infrastructure.config.tenant.TenantContext;
 
 @Component
 public class HeaderTenantInterceptor implements WebRequestInterceptor {
