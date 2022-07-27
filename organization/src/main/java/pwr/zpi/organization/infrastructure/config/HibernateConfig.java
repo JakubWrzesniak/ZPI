@@ -25,6 +25,7 @@ public class HibernateConfig {
         dataSource.setPassword("Stud@1234");
         dataSource.setEncrypt(true);
         dataSource.setTrustServerCertificate(true);
+        dataSource.setDatabaseName("PUB");
         dataSource.setServerName("localhost");
         return dataSource;
     }

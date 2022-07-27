@@ -13,12 +13,8 @@ import com.microsoft.azure.elasticdb.shard.sqlstore.SqlConnectionStringBuilder;
 /**
  * Provides access to app.config settings, and contains advanced configuration settings.
  */
-public final class Configuration {
+final class Configuration {
 
-    /**
-     * Get the following properties from resource file. CONN_SERVER_NAME CONN_DB_NAME CONN_USER CONN_PASSWORD CONN_APP_NAME DB_EDITION
-     * RANGE_SHARD_MAP_NAME LIST_SHARD_MAP_NAME
-     */
     private static Properties properties = loadProperties();
 
     static Properties loadProperties() {
@@ -35,58 +31,40 @@ public final class Configuration {
         return prop;
     }
 
-    /**
-     * Gets the server name for the Shard Map Manager database, which contains the shard maps.
-     */
     public static String getShardMapManagerServerName() {
-        return properties.getProperty("TEST_CONN_SERVER_NAME");
+        return properties.getProperty("CONN_SERVER_NAME");
     }
 
-    /**
-     * Gets the database name for the Shard Map Manager database, which contains the shard maps.
-     */
     public static String getShardMapManagerDatabaseName() {
         return properties.getProperty("CONN_DB_NAME");
     }
 
-    /**
-     * Gets the name for the Range Shard Map that contains metadata for all the shards and the mappings to those shards.
-     */
-    static String getRangeShardMapName() {
-        return properties.getProperty("RANGE_SHARD_MAP_NAME");
+    static String getShardMapName() {
+        return properties.getProperty("ORGANIZATION_SHARD_MAP_NAME");
     }
 
-    /**
-     * Gets the name for the List Shard Map that contains metadata for all the shards and the mappings to those shards.
-     */
-    static String getListShardMapName() {
-        return properties.getProperty("LIST_SHARD_MAP_NAME");
-    }
-
-    /**
-     * Gets the edition to use for Shards and Shard Map Manager Database if the server is an Azure SQL DB server. If the server is a regular SQL
-     * Server then this is ignored.
-     */
     static String getDatabaseEdition() {
         return properties.getProperty("DB_EDITION");
     }
 
-    /**
-     * Returns a connection string that can be used to connect to the specified server and database.
-     */
+    static String getOrgShardNameFormat(){
+        return properties.getProperty("ORGANIZATION_SHAR_NAME_FORMAT");
+    }
+
+    public static String getSQLScriptFileName() {
+        return properties.getProperty("INITIAL_SHARD_SCRIPT");
+    }
+
     static String getConnectionString(String serverName,
             String database) {
         SqlConnectionStringBuilder connStr = new SqlConnectionStringBuilder(getCredentialsConnectionString());
         connStr.setDataSource(serverName);
         connStr.setDatabaseName(database);
         connStr.setIntegratedSecurity(true);
-        System.out.println(connStr.toString());
-        return connStr.toString() + "encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2;";
+        System.out.println(connStr);
+        return connStr.toString();
     }
 
-    /**
-     * Returns a connection string to use for Data-Dependent Routing and Multi-Shard Query, which does not contain DataSource or DatabaseName.
-     */
     static String getCredentialsConnectionString() {
 
         // Get Integrated Security from the app.config file.
@@ -95,11 +73,11 @@ public final class Configuration {
         boolean integratedSecurity = true;
 
         SqlConnectionStringBuilder connStr = new SqlConnectionStringBuilder();
-        connStr.setUser(properties.getProperty("TEST_CONN_USER"));
-        connStr.setPassword(properties.getProperty("TEST_CONN_PASSWORD"));
+        connStr.setUser(properties.getProperty("CONN_USER"));
+        connStr.setPassword(properties.getProperty("CONN_PASSWORD"));
         connStr.setIntegratedSecurity(integratedSecurity);
-       // connStr.setApplicationName(properties.getProperty("CONN_APP_NAME"));
+        connStr.setApplicationName(properties.getProperty("CONN_APP_NAME"));
         connStr.setConnectTimeout(30);
-        return connStr.toString();
+        return connStr + "encrypt=true;trustServerCertificate=true;";
     }
 }

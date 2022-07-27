@@ -6,5 +6,9 @@ import java.util.UUID;
 
 public interface OrganizationRepositoryPort {
     OrganizationDto save(OrganizationDto organization);
-    boolean createOrganization(UUID organizationId);
+
+    boolean delete(UUID orgId);
+    void createOrganization(UUID organizationId);
+
+    void deleteOrganization(UUID organizationI);
 }

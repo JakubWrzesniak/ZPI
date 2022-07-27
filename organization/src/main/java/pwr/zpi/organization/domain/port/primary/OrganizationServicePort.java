@@ -22,6 +22,12 @@ public class OrganizationServicePort implements OrganizationServiceAdapter {
         return organizationMapper.OrganizationToOrganizationDto(createOrganizationHelper(organization));
     }
 
+    @Override
+    public boolean deleteOrganization(UUID orgId) {
+        organizationsRepository.deleteOrganization(orgId);
+        return organizationsRepository.delete(orgId);
+    }
+
     public Organization createOrganizationHelper(OrganizationDto organization) {
         // Tu tylko mapper zamiast buildera
         var newOrg = Organization.builder()
@@ -31,7 +37,7 @@ public class OrganizationServicePort implements OrganizationServiceAdapter {
                 .build();
         OrganizationDto newOrgDto = organizationsRepository.save(organizationMapper
                 .OrganizationToOrganizationDto(newOrg));
-        organizationsRepository.createOrganization(UUID.fromString((newOrgDto.getId().toString())));
+        organizationsRepository.createOrganization(newOrgDto.getId());
         return organizationMapper.OrganizationDtoToOrganization(newOrgDto);
     }
 

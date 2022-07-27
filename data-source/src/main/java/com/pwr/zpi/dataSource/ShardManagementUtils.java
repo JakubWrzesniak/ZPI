@@ -5,6 +5,7 @@ package com.pwr.zpi.dataSource;
  */
 
 import com.microsoft.azure.elasticdb.core.commons.helpers.ReferenceObjectHelper;
+import com.microsoft.azure.elasticdb.shard.base.PointMapping;
 import com.microsoft.azure.elasticdb.shard.base.Shard;
 import com.microsoft.azure.elasticdb.shard.base.ShardKeyType;
 import com.microsoft.azure.elasticdb.shard.base.ShardLocation;
@@ -15,7 +16,7 @@ import com.microsoft.azure.elasticdb.shard.mapmanager.ShardMapManager;
 import com.microsoft.azure.elasticdb.shard.mapmanager.ShardMapManagerFactory;
 import com.microsoft.azure.elasticdb.shard.mapmanager.ShardMapManagerLoadPolicy;
 
-public final class ShardManagementUtils {
+final class ShardManagementUtils {
 
     /**
      * Tries to get the ShardMapManager that is stored in the specified database.
@@ -78,34 +79,6 @@ public final class ShardManagementUtils {
     /**
      * Creates a new Range Shard Map with the specified name, or gets the Range Shard Map if it already exists.
      */
-    static <T> RangeShardMap<T> createOrGetRangeShardMap(ShardMapManager shardMapManager,
-            String shardMapName,
-            ShardKeyType keyType) {
-        // Try to get a reference to the Shard Map.
-        ReferenceObjectHelper<RangeShardMap<T>> refRangeShardMap = new ReferenceObjectHelper<>(null);
-        boolean isGetSuccess = shardMapManager.tryGetRangeShardMap(shardMapName, keyType, refRangeShardMap);
-        RangeShardMap<T> shardMap = refRangeShardMap.argValue;
-
-        if (isGetSuccess && shardMap != null) {
-            ConsoleUtils.writeInfo("Shard Map %1$s already exists", shardMap.getName());
-        }
-        else {
-            // The Shard Map does not exist, so create it
-            try {
-                shardMap = shardMapManager.createRangeShardMap(shardMapName, keyType);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            ConsoleUtils.writeInfo("Created Shard Map %1$s", shardMap.getName());
-        }
-
-        return shardMap;
-    }
-
-    /**
-     * Creates a new Range Shard Map with the specified name, or gets the Range Shard Map if it already exists.
-     */
     static <T> ListShardMap<T> createOrGetListShardMap(ShardMapManager shardMapManager,
             String shardMapName,
             ShardKeyType keyType) {
@@ -152,5 +125,20 @@ public final class ShardManagementUtils {
         }
 
         return shard;
+    }
+
+    public static void removeShard(ShardMap shardMap, ShardLocation shardLocation){
+        Shard shard = shardMap.getShard(shardLocation);
+        shardMap.deleteShard(shard);
+    }
+
+    public static <KeyT> void removeMapping(ListShardMap<KeyT> shardMap, KeyT tenantId){
+        PointMapping pointMapping = shardMap.getMappingForKey(tenantId);
+        shardMap.deleteMapping(pointMapping);
+    }
+
+    public static <KeyT> void setMappingPointOffline(ListShardMap<KeyT> shardMap, KeyT tenantId){
+        PointMapping pointMapping = shardMap.getMappingForKey(tenantId);
+        shardMap.markMappingOffline(pointMapping);
     }
 }

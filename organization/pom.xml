@@ -52,8 +52,8 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure-samples</artifactId>
+            <groupId>com.pwr.zpi</groupId>
+            <artifactId>data-source</artifactId>
             <version>1.0.1</version>
             <scope>compile</scope>
         </dependency>

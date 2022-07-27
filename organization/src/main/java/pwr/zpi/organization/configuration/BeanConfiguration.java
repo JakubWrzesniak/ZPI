@@ -1,5 +1,6 @@
 package pwr.zpi.organization.configuration;
 
+import com.pwr.zpi.dataSource.TenantDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pwr.zpi.organization.application.adpter.primary.IssueServiceAdapter;
@@ -20,5 +21,10 @@ public class BeanConfiguration {
     @Bean
     IssueServiceAdapter issueServiceAdapter(IssueRepositoryAdapter issueAdapter) {
         return new IssueServicePort(issueAdapter);
+    }
+
+    @Bean
+    TenantDataSource tenantDataSource(){
+        return TenantDataSource.get();
     }
 }

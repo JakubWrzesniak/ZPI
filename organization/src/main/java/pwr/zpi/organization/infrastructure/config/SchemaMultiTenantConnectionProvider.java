@@ -1,25 +1,37 @@
 package pwr.zpi.organization.infrastructure.config;
 
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.pwr.zpi.dataSource.TenantDataSource;
 import lombok.extern.log4j.Log4j2;
+import net.bytebuddy.implementation.bytecode.Throw;
+import org.hibernate.context.TenantIdentifierMismatchException;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pwr.zpi.organization.infrastructure.service.ShardManagementService;
 
+import javax.sql.DataSource;
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import static pwr.zpi.organization.infrastructure.config.tenant.TenantContext.DEFAULT_TENANT_ID;
-import static pwr.zpi.organization.infrastructure.service.SqlDatabaseService.getConnectionString;
 
 @Log4j2
 @Service
 public class SchemaMultiTenantConnectionProvider implements MultiTenantConnectionProvider {
 
+    @Autowired
+    TenantDataSource tenantDataSource;
 
     @Override
     public Connection getAnyConnection() throws SQLException {
-        return DriverManager.getConnection(getConnectionString("localhost", "PUB"));
+        SQLServerDataSource dataSource = new SQLServerDataSource();
+        dataSource.setEncrypt(true);
+        dataSource.setTrustServerCertificate(true);
+        dataSource.setServerName("localhost");
+        dataSource.setDatabaseName("PUB");
+        return dataSource.getConnection("sa", "Stud@1234");
     }
 
     @Override
@@ -34,7 +46,7 @@ public class SchemaMultiTenantConnectionProvider implements MultiTenantConnectio
             if(tenantId.equals(DEFAULT_TENANT_ID)){
                 conn = getAnyConnection();
             } else {
-                conn = ShardManagementService.getConnection(tenantId.hashCode());
+                conn = tenantDataSource.getConnectionToDatabase(tenantId.hashCode());
             }
         } catch (Exception e) {
             log.error("error: ", e);

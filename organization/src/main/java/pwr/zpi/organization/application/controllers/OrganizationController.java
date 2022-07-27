@@ -29,8 +29,15 @@ public class OrganizationController {
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
     public OrganizationDto create(@RequestBody OrganizationCreationViewModel resource) {
-        OrganizationDto organizationDto = new OrganizationDto(UUID.randomUUID(), resource.getName(), resource.getAddress());
+        OrganizationDto organizationDto = new OrganizationDto(null, resource.getName(), resource.getAddress());
         return organizationService.createOrganization(organizationDto);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
+    public void delete(@RequestParam UUID orgId) {
+        organizationService.deleteOrganization(orgId);
     }
 //
 //    @PostMapping("/addIssue")

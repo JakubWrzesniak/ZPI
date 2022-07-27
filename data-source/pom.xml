@@ -3,43 +3,24 @@
 	xmlns="http://maven.apache.org/POM/4.0.0"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.microsoft.azure</groupId>
-	<artifactId>azure-samples</artifactId>
-	<version>1.0.1</version>
-	<packaging>jar</packaging>
-
 	<name>Data Source</name>
 
+	<groupId>com.pwr.zpi</groupId>
+	<artifactId>data-source</artifactId>
+	<version>1.0.1</version>
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
 					<source>9</source>
 					<target>9</target>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>${exec-maven-plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-						<configuration>
-							<executable>java</executable>
-<!--							<mainClass>Program</mainClass>-->
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 		</plugins>
 	</build>
+	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
@@ -57,20 +38,10 @@
 
 	<properties>
 		<azurejavasdk.version>${project.version}</azurejavasdk.version>
-		<jre.version>1.8</jre.version>
+		<jre.version>17</jre.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<elastic-db-tools.version>1.0.1</elastic-db-tools.version>
 		<maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
 		<exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
 	</properties>
-
-	<developers>
-		<developer>
-			<id>microsoft</id>
-			<name>Microsoft</name>
-		</developer>
-	</developers>
-
-	<description>Microsoft Azure Elastic database tools sample project.</description>
-	<url>https://github.com/Microsoft/elastic-db-tools-for-java</url>
 </project>
